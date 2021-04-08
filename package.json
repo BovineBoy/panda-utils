@@ -1,0 +1,34 @@
+{
+  "name": "panda-utils",
+  "version": "0.0.1-beta",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "babel src/index.ts --watch --out-file dist/index.js --source-maps",
+    "build": "yarn build:file && yarn build:file-cjs && yarn minify && yarn minify:cjs && yarn build:types",
+    "build:file-cjs": "babel src/index.ts --out-file dist/index.cjs.js --plugins=@babel/plugin-transform-modules-commonjs",
+    "build:file": "babel src/index.ts --out-file dist/index.js",
+    "build:types": "tsc -p tsconfig.types.json",
+    "minify": "babel src/index.ts --out-file dist/index.min.js --presets=babel-preset-minify",
+    "minify:cjs": "babel src/index.ts --out-file dist/index.cjs.min.js --presets=babel-preset-minify  --plugins=@babel/plugin-transform-modules-commonjs",
+    "clean": "rimraf dist",
+    "predev": "yarn clean",
+    "prebuild": "yarn clean",
+    "publish": "np"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.13.14",
+    "@babel/core": "^7.13.14",
+    "@babel/plugin-transform-modules-commonjs": "^7.13.8",
+    "@babel/preset-typescript": "^7.13.0",
+    "@ordures/prettier-config": "^0.1.0",
+    "@types/node": "^14.14.37",
+    "babel-preset-minify": "^0.5.1",
+    "np": "^7.4.0",
+    "rimraf": "^3.0.2",
+    "typescript": "^4.2.4"
+  },
+  "dependencies": {
+    "read-pkg-up": "^8.0.0"
+  }
+}
